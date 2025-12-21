@@ -1,0 +1,76 @@
+/* Cyber-Dystopie-Stil */
+:root {
+    --cyber-purple: #9d00ff;
+    --cyber-blue: #00d4ff;
+    --cyber-black: #0a0a1a;
+}
+
+body.cyber-body {
+    background-color: var(--cyber-black);
+    color: var(--cyber-blue);
+    font-family: 'Rajdhani', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    border: 1px solid var(--cyber-purple);
+    border-radius: 5px;
+    box-shadow: 0 0 20px var(--cyber-purple);
+}
+
+h1.glitch {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    margin: 0;
+    position: relative;
+    color: var(--cyber-purple);
+    text-shadow: 0 0 10px var(--cyber-blue);
+    animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(2deg); }
+    40% { transform: skew(-1deg); }
+    60% { transform: skew(1deg); }
+    80% { transform: skew(-2deg); }
+    100% { transform: skew(0deg); }
+}
+
+.cyber-button {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, var(--cyber-purple), var(--cyber-blue));
+    color: white;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px var(--cyber-purple);
+}
+
+.cyber-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--cyber-blue);
+}
+
+.cyber-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+
