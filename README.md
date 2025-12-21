@@ -5,5 +5,5 @@ Collaborations are Welcome with **Pull Requests**
 
 
 
-### License
+## License
 Look at _LICENSE_
