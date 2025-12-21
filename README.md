@@ -1,4 +1,4 @@
-#  Guns And Choices Website
+# Guns And Choices Website
 
 Collaborations are Welcome with **Pull Requests**
 
