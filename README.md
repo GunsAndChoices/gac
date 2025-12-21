@@ -1,6 +1,6 @@
 #  Guns And Choices Website
 
-Collaberations are Welcome with **Pull Requests**
+Collaborations are Welcome with **Pull Requests**
 
 
 
