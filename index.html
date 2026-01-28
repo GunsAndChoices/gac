@@ -1,27 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAC</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-purple': '#4A099A',
+                        'cyber-blue': '#003f92',
+                        'cyber-black': '#070707',
+                        'black': '#000000',
+                    },
+                    fontFamily: {
+                        'orbitron': ['Orbitron', 'sans-serif'],
+                        'rajdhani': ['Rajdhani', 'sans-serif'],
+                    },
+                    animation: {
+                        'glitch': 'glitch 2s linear infinite',
+                    },
+                    keyframes: {
+                        glitch: {
+                            '0%, 100%': { transform: 'skew(0deg)' },
+                            '20%': { transform: 'skew(2deg)' },
+                            '40%': { transform: 'skew(-1deg)' },
+                            '60%': { transform: 'skew(1deg)' },
+                            '80%': { transform: 'skew(-2deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        /* Spezielle Pseudo-Element-Logik für den Glitch-Effekt auf Texten */
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            @apply absolute left-0 top-0 w-full h-full opacity-80 pointer-events-none;
+        }
+    </style>
 </head>
 
-<body class="cyber-body">
-    <div class="container">
-        <h1 class="glitch" data-text="CYBER DISTOPIA">Guns And Choises</h1>
-        <p class="cyber-text glitch">Welcome to the official website of Guns And Choises (GAC) - your gateway to cutting-edge
-            gaming
-            experiences. Explore our latest updates, learn more about us, and get ready for the upcoming GAC Launcher!</p>
-        <div class="cyber-buttons">
-            <a href="about.html" class="cyber-button">WHO ARE WE?</a>
-            <a href="updates.html" class="cyber-button">Updates</a>
-            <a href="launcher.html" class="cyber-button">(Coming soon) GAC Launcher</a>
+<body class="bg-black text-cyber-blue font-rajdhani m-0 p-0 flex justify-center items-center h-screen overflow-hidden">
+
+    <div class="text-center p-8 border border-cyber-purple rounded-md shadow-[0_0_20px_#4A099A] bg-cyber-black max-w-2xl">
+        
+        <h1 class="font-orbitron text-[3.5rem] m-0 relative text-cyber-purple drop-shadow-[0_0_10px_#003f92] animate-glitch" data-text="CYBER DISTOPIA">
+            Guns And Choices
+        </h1>
+
+        <p class="text-[1.2rem] leading-[1.6] my-8 mx-auto glitch-text animate-glitch" data-text="Welcome to the official website of Guns And Choises (GAC)...">
+            Welcome to the official website of Guns And Choises (GAC) - your gateway to cutting-edge gaming experiences. Explore our latest updates, learn more about us, and get ready for the upcoming GAC Launcher!
+        </p>
+
+        <div class="flex flex-col gap-4 items-center">
+            <a href="about.html" 
+               class="inline-block py-4 px-8 bg-gradient-to-r from-cyber-purple to-cyber-blue text-white no-underline font-orbitron text-[1.2rem] rounded-md transition-all duration-300 shadow-[0_0_10px_#4A099A] hover:scale-105 hover:shadow-[0_0_20px_#003f92]">
+               WHO ARE WE?
+            </a>
+            
+            <a href="updates.html" 
+               class="inline-block py-4 px-8 bg-gradient-to-r from-cyber-purple to-cyber-blue text-white no-underline font-orbitron text-[1.2rem] rounded-md transition-all duration-300 shadow-[0_0_10px_#4A099A] hover:scale-105 hover:shadow-[0_0_20px_#003f92]">
+               Updates
+            </a>
+            
+            <a href="launcher.html" 
+               class="inline-block py-4 px-8 bg-gradient-to-r from-cyber-purple to-cyber-blue text-white no-underline font-orbitron text-[1.2rem] rounded-md transition-all duration-300 shadow-[0_0_10px_#4A099A] hover:scale-105 hover:shadow-[0_0_20px_#003f92]">
+               (Coming soon) GAC Launcher
+            </a>
         </div>
     </div>
-</body>
 
+</body>
 </html>
