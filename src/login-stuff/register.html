@@ -14,7 +14,7 @@
         rel="stylesheet">
 </head>
 
-<body class="font-mono min-h-screen flex flex-col items-center justify-center p-4">
+<body class="font-mono min-h-screen flex flex-col items-center justify-center p-4 bg-gac-black text-gac-white">
     <div class="scanline"></div>
 
     <div
@@ -58,22 +58,72 @@
     <script>
         document.getElementById('register-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorBox = document.getElementById('error-msg');
+            const toastsContainer = document.querySelector('.toasts');
 
-            const res = await fetch('/api/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password })
-            });
+            // Reset error box
+            errorBox.classList.add('hidden');
+            errorBox.textContent = '';
 
-            const data = await res.json();
+            try {
+                const res = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
 
-            if (data.success) {
-                window.location.href = '/_l/load';
-            } else {
-                errorBox.innerText = '[!] ' + data.message;
+                // Auch bei 409 Conflict parsen wir das JSON
+                const data = await res.json();
+                console.log("Server Response:", data);
+
+                if (res.ok && data.success) {
+                    // ERFOLG
+                    const successText = "Registered Successfully! Redirecting...";
+                    const toastRes = await fetch('/api/toast/success', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: successText })
+                    });
+
+                    const toastData = await toastRes.json();
+                    if (toastData.html) {
+                        const div = document.createElement('div');
+                        div.innerHTML = toastData.html;
+                        toastsContainer.appendChild(div);
+                    }
+
+                    await new Promise(r => setTimeout(r, 2000));
+                    window.location.href = '/_l/load';
+
+                } else {
+                    // FEHLER (z.B. 409 Conflict)
+                    // Wir nutzen die Nachricht direkt vom Server: "FEHLER: Identität existiert bereits"
+                    const errorText = data.message || "An error occurred";
+
+                    // Fehlermeldung in die rote Box über dem Formular schreiben
+                    errorBox.textContent = errorText;
+                    errorBox.classList.remove('hidden');
+
+                    // Optional: Den Error-Toast vom Server abrufen
+                    const toastRes = await fetch('/api/toast/error', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: errorText })
+                    });
+
+                    const toastData = await toastRes.json();
+                    if (toastData.html) {
+                        const div = document.createElement('div');
+                        div.innerHTML = toastData.html;
+                        toastsContainer.appendChild(div);
+                    }
+                }
+            } catch (err) {
+                console.error("Critical Error:", err);
+                errorBox.textContent = "SYSTEM_FAILURE: Could not connect to registry.";
                 errorBox.classList.remove('hidden');
             }
         });

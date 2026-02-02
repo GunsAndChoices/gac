@@ -3,17 +3,21 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 // Router Paths
-let api_toasts = require('./routes/api-toasts.js');    
+let api_toasts = require('./routes/api-toasts.js');
+let api_login = require('./routes/api-login.js');
 
 // Adding Router Paths
 app.use(api_toasts);
+app.use(api_login)
 
 // Normal API
-
 app.use('/dist', express.static(path.join(__dirname, 'dist'))); // Generated Content
 app.use('/src', express.static(path.join(__dirname, 'src'))); // Pages
 app.use(express.static(path.join(__dirname, 'public'))); // Images, Videos, Files, etc...
