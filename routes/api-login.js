@@ -3,6 +3,7 @@ const router = express.Router();
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const Database = require('better-sqlite3');
+const logger = require('../logger');
 
 const db = new Database('gac_users.db');
 
@@ -25,14 +26,6 @@ db.exec(`
     )
 `);
 
-const requireLogin = (req, res, next) => {
-    if (!req.session.userId) {
-        return res.redirect('/');
-    }
-    next();
-};
-
-
 router.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     
@@ -43,12 +36,14 @@ router.post('/api/login', (req, res) => {
         if (user && bcrypt.compareSync(password, user.password)) {
             req.session.userId = user.id;
             req.session.username = user.username;
+            logger.info(`Login erfolgreich: "${username}"`);
             return res.json({ success: true });
         } else {
-            return res.status(401).json({ success: false, message: 'ZUGRIFF VERWEIGERT: Daten ungültig' });
+            logger.warn(`Login fehlgeschlagen für: "${username}"`);
+            return res.status(401).json({ success: false, message: 'ZUGRIFF VERWEIGERT' });
         }
     } catch (err) {
-        console.error(err);
+        logger.error(`Datenbankfehler Login: ${err.message}`);
         return res.status(500).json({ success: false, message: 'SYSTEMFEHLER' });
     }
 });
@@ -65,21 +60,25 @@ router.post('/api/register', (req, res) => {
         const stmt = db.prepare('INSERT INTO users (username, password) VALUES (?, ?)');
         const result = stmt.run(username, hashedPassword);
         
-        // AUTO-LOGIN nach Erfolg
         req.session.userId = result.lastInsertRowid;
         req.session.username = username;
 
+        logger.info(`Neuer Benutzer registriert: "${username}"`);
         return res.json({ success: true });
     } catch (err) {
         if (err.code === 'SQLITE_CONSTRAINT_UNIQUE') {
-            return res.status(409).json({ success: false, message: 'FEHLER: Identität existiert bereits' });
+            logger.warn(`Registrierung abgelehnt (Nutzer existiert): "${username}"`);
+            return res.status(409).json({ success: false, message: 'Existiert bereits' });
         }
+        logger.error(`Registrierungsfehler: ${err.message}`);
         return res.status(500).json({ success: false, message: 'SYSTEMFEHLER' });
     }
 });
 
 router.post('/api/logout', (req, res) => {
+    const user = req.session.username;
     req.session.destroy();
+    logger.info(`Benutzer ausgeloggt: "${user}"`);
     res.json({ success: true });
 });
 

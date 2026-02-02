@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guns And Choices | 404 Not Found</title>
+
+    <link href="/dist/output.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body
+    class="font-mono min-h-screen flex flex-col items-center justify-center p-4 bg-gac-black text-gac-white overflow-hidden">
+
+    <div class="animate-gac-scan fixed left-0 w-full h-[1px] bg-white/10 pointer-events-none z-[100]"></div>
+
+    <div
+        class="w-full max-w-2xl terminal-window p-8 md:p-12 relative bg-gac-black shadow-[0_0_30px_rgba(255,0,0,0.1)] border-gac-red/30">
+        <div class="absolute -top-3 left-4 bg-gac-black px-2 text-[10px] font-bold tracking-widest text-gac-red">
+            CRITICAL_ERROR_v404</div>
+
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <div
+                class="text-7xl md:text-9xl font-orbitron font-bold text-gac-red animate-pulse">
+                404
+            </div>
+
+            <div class="flex-1 space-y-4 text-center md:text-left">
+                <h1 class="text-xl md:text-2xl font-orbitron uppercase tracking-tighter border-b border-gray-800 pb-2">
+                    Access Denied / Not Found
+                </h1>
+
+                <div class="space-y-2 text-sm text-gray-400 leading-relaxed">
+                    <p>
+                        <span class="text-gac-red font-bold">DETECTION_LOG:</span>
+                        Die angeforderte Ressource wurde im lokalen Cluster nicht gefunden.
+                        Möglicherweise wurde der Link korrumpiert oder die Datei vom System-Administrator gelöscht.
+                    </p>
+                    <p class="text-[10px] font-mono opacity-60 italic break-all overflow-hidden">
+                        ERR_CODE: GAC_FILE_NULL_EXCEPTION<br>
+                        TARGET_REF: <span id="target-path" class="inline-block max-w-full">UNDEFINED</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-gray-900 pt-8">
+            <a href="/"
+                class="flex items-center justify-center gap-2 border border-gac-white text-gac-white px-6 py-3 hover:bg-gac-white hover:text-gac-black transition-all font-bold uppercase tracking-widest text-sm">
+                <i class="fa-solid fa-house-signal text-xs"></i> Return Home
+            </a>
+            <button onclick="window.history.back()"
+                class="flex items-center justify-center gap-2 border border-gray-600 text-gray-400 px-6 py-3 hover:border-white hover:text-white transition-all font-bold uppercase tracking-widest text-sm">
+                <i class="fa-solid fa-arrow-left text-xs"></i> Go Back
+            </button>
+        </div>
+
+        <div
+            class="mt-8 flex justify-between items-center text-[9px] text-gray-600 font-mono uppercase tracking-widest">
+            <div class="flex gap-4">
+                <span class="text-gac-red">● UPLINK_LOST</span>
+                <span>SEC_LAYER: ACTIVE</span>
+            </div>
+            <span id="timestamp">TIMESTAMP: 2026-02-02_14:42</span>
+        </div>
+    </div>
+
+    <div class="fixed bottom-10 left-10 opacity-10 pointer-events-none hidden lg:block">
+        <pre class="text-[8px] leading-tight text-white">
+            01001110 01001111 01010100
+            01000110 01001111 01010101
+            01001110 01000100 00100000
+        </pre>
+    </div>
+
+    <script>
+        // Pfad anzeigen, der nicht gefunden wurde
+        document.getElementById('target-path').innerText = window.location.pathname;
+
+        // Zeitstempel aktualisieren
+        const now = new Date();
+        const formattedDate = now.toISOString().split('T')[0] + "_" + now.getHours() + ":" + now.getMinutes();
+        document.getElementById('timestamp').innerText = `TIMESTAMP: ${formattedDate}`;
+
+        let inputBuffer = "";
+        document.addEventListener('keydown', (e) => {
+            inputBuffer += e.key.toLowerCase();
+            if (inputBuffer.includes("null")) {
+                document.body.classList.add('brightness-150', 'hue-rotate-[120deg]');
+                console.log("SYSTEM_OVERRIDE: Matrix Mode Engaged.");
+                setTimeout(() => {
+                    document.body.classList.remove('brightness-150', 'hue-rotate-[120deg]');
+                    inputBuffer = "";
+                }, 5000);
+            }
+            if (inputBuffer.length > 10) inputBuffer = inputBuffer.substring(1);
+        });
+    </script>
+</body>
+
+</html>

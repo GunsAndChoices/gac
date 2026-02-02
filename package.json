@@ -30,11 +30,12 @@
     "test": "echo [ERROR]: No Test Command Definded && exit 1"
   },
   "dependencies": {
-    "tailwindcss": "^4.0.0",
     "@tailwindcss/cli": "^4.0.0",
-    "express": "^5.2.1",
     "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.6.2",
-    "express-session": "^1.19.0"
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "tailwindcss": "^4.0.0",
+    "winston": "^3.19.0"
   }
 }
