@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guns And Choices | Login</title>
+
+    <link href="/dist/output.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Italiana&family=Orbitron:wght@400;700&family=Rajdhani:wght@600&family=Forum&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="font-mono min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="scanline"></div>
+
+    <div
+        class="w-full max-w-md border-2 border-gac-white p-6 relative bg-gac-black shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+        <div class="absolute -top-3 left-4 bg-gac-black px-2 text-sm font-bold tracking-widest">SYSTEM_AUTH</div>
+
+        <header class="mb-8 text-center border-b border-gray-800 pb-4">
+            <h1 class="text-2xl font-bold uppercase tracking-widest">GUNS & CHOICES<br>ACCESS</h1>
+        </header>
+
+        <h2 class="text-xl mb-6 uppercase border-l-4 border-gac-white pl-3">/// LOGIN SEQUENCE</h2>
+
+        <div id="error-msg" class="hidden mb-4 border border-gac-red text-gac-red p-2 text-sm"></div>
+
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label class="block text-xs uppercase mb-1 opacity-70">Identity</label>
+                <input type="text" id="username"
+                    class="w-full bg-gac-black border border-gray-600 p-2 text-gac-white focus:border-gac-white outline-none"
+                    placeholder="ENTER_ID">
+            </div>
+            <div>
+                <label class="block text-xs uppercase mb-1 opacity-70">Passcode</label>
+                <input type="password" id="password"
+                    class="w-full bg-gac-black border border-gray-600 p-2 text-gac-white focus:border-gac-white outline-none"
+                    placeholder="******">
+            </div>
+            <button type="submit"
+                class="w-full bg-gac-white text-gac-black font-bold py-3 mt-4 hover:bg-white uppercase tracking-widest">Authenticate</button>
+        </form>
+
+        <div class="mt-6 text-center text-sm">
+            <a href="/register" class="underline hover:text-white decoration-1 underline-offset-4">INITIATE
+                REGISTRATION</a>
+        </div>
+    </div>
+
+    <div class="toasts fixed bottom-5 right-5 z-50 flex flex-col gap-2">
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorBox = document.getElementById('error-msg');
+
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                window.location.href = '/_l/load';
+            } else {
+                errorBox.innerText = '[!] ' + data.message;
+                errorBox.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

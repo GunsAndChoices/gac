@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guns And Choices | Home</title>
+
+    <link href="/dist/output.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="font-main min-h-screen selection:bg-gac-white selection:text-gac-black bg-gac-dblue">
+
+    <div class="animate-gac-scan fixed left-0 w-full h-[1px] bg-white/10 pointer-events-none z-[100]"></div>
+
+    <header class="m-4 md:m-6">
+        <div class="terminal-window p-4">
+            <div class="absolute -top-3 left-4 bg-gac-black px-2 text-[10px] font-bold tracking-widest text-gray-500">
+                SYS_NAV_v2</div>
+
+            <nav class="container mx-auto flex justify-between items-center">
+                <a href="#" class="flex items-center group">
+                    <div
+                        class="h-10 w-14 logo-clip bg-gac-white flex items-center justify-center transition-transform group-hover:scale-105">
+                        <img src="icon.png" alt="" class="w-full h-full object-cover opacity-80 invert">
+                    </div>
+                    <span class="ml-4 text-xl md:text-2xl font-orbitron font-bold tracking-tighter">
+                        Guns And Choices
+                    </span>
+                </a>
+
+                <div id="nav-container"
+                    class="hidden xl:flex items-center relative space-x-6 text-sm font-bold uppercase tracking-widest">
+                    <div id="nav-indicator"
+                        class="absolute bottom-[-4px] h-[2px] bg-white transition-all duration-300 ease-out pointer-events-none">
+                    </div>
+
+                    <a href="#" class="nav-link text-white" data-active="true">Home</a>
+                    <a href="#" class="nav-link text-gray-500 hover:text-white transition-colors">About</a>
+                    <a href="#" class="nav-link text-gray-500 hover:text-white transition-colors">Creative</a>
+                    <a href="#" class="nav-link text-gray-500 hover:text-white transition-colors">Contact</a>
+                    <a href="#" class="nav-link text-gray-500 hover:text-white transition-colors">Impressum</a>
+
+                    <div class="w-[1px] h-6 bg-gray-800 mx-2"></div>
+
+                    <a href="#"
+                        class="border border-gray-600 px-4 py-2 hover:border-white transition-colors">Launcher</a>
+                    <a href="/login"
+                        class="bg-gac-white text-gac-black px-6 py-2 hover:bg-white transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-user text-xs"></i> Login
+                    </a>
+                </div>
+
+                <button onclick="toggleMenu()" class="xl:hidden text-gac-white p-2">
+                    <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                </button>
+            </nav>
+
+            <div id="mobile-menu" class="hidden xl:hidden mt-6 border-t border-gray-800 pt-6 font-mono text-sm">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="text-white">> Home</a>
+                    <a href="#" class="text-gray-500">> About</a>
+                    <a href="#" class="text-gray-500">> Creative</a>
+                    <a href="#" class="text-gray-500">> Contact</a>
+                    <div class="grid grid-cols-2 gap-4 pt-4 font-main">
+                        <a href="#" class="text-center py-2 border border-gray-600 uppercase">Launcher</a>
+                        <a href="/login"
+                            class="text-center py-2 bg-gac-white text-gac-black font-bold uppercase">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toasts fixed bottom-5 right-5 z-50 flex flex-col gap-2">
+        </div>
+    </header>
+
+    <main class="m-4 md:m-6">
+        <div class="terminal-window p-6 md:p-10">
+            <div class="absolute -top-3 left-4 bg-gac-black px-2 text-[10px] font-bold tracking-widest text-gray-500">
+                CONTENT_FEED</div>
+
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-[2px] w-12 bg-gac-red"></div>
+                <h2 class="text-2xl font-orbitron uppercase tracking-widest text-gac-white">Interface Dashboard</h2>
+            </div>
+
+            <div class="prose prose-invert max-w-none">
+                <p class="text-lg md:text-xl text-gray-400 leading-relaxed font-mono">
+                    <span class="text-gac-white font-bold">SYSTEM_LOG:</span> Lorem ipsum dolor sit amet consectetur
+                    adipisicing elit. Aspernatur, animi, possimus, eaque voluptate
+                    earum id dolorem impedit ut hic excepturi corporis? Error nam delectus beatae voluptates distinctio
+                    officia atque placeat!
+                </p>
+            </div>
+
+            <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-gray-900 pt-8">
+                <div class="text-[10px] font-mono text-gray-600">
+                    STATUS: <span class="text-green-600 animate-pulse">ENCRYPTED</span>
+                </div>
+                <div class="text-[10px] font-mono text-gray-600">
+                    VERSION: <span class="text-gac-white">2.0.4b</span>
+                </div>
+                <div class="text-[10px] font-mono text-gray-600">
+                    UPLINK: <span class="text-gac-white">STABLE</span>
+                </div>
+                <div class="text-[10px] font-mono text-gray-600">
+                    LOC: <span class="text-gac-white">EU_CENTRAL_1</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="m-4 md:m-6 mt-20">
+        <div class="terminal-window p-6 relative overflow-hidden">
+            <div class="absolute -top-3 left-4 bg-gac-black px-2 text-[10px] font-bold tracking-widest text-gray-500">
+                SYS_FOOTER_DATA</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-gac-white font-orbitron text-sm tracking-tighter">GAC_STUDIOS</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed font-mono">
+                        Advanced tactical solutions and digital choice architecture.
+                        Established 2026. All rights reserved by the syndicate.
+                    </p>
+                </div>
+
+                <div class="font-mono text-[10px] space-y-2">
+                    <div class="flex justify-between border-b border-gray-900 pb-1">
+                        <span class="text-gray-600">NETWORK_LATENCY:</span>
+                        <span class="text-green-500">12ms</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-900 pb-1">
+                        <span class="text-gray-600">DB_CLUSTERS:</span>
+                        <span class="text-gac-white">ACTIVE (04)</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-900 pb-1">
+                        <span class="text-gray-600">ENCRYPTION:</span>
+                        <span class="text-gac-white">AES-256-GCM</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col space-y-2 text-xs font-bold uppercase tracking-widest items-end">
+                    <a href="#" class="text-gray-500 hover:text-gac-white transition-colors">Security Protocol</a>
+                    <a href="#" class="text-gray-500 hover:text-gac-white transition-colors">API Documentation</a>
+                    <a href="#" class="text-gray-500 hover:text-gac-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+
+            <div
+                class="mt-8 pt-4 border-t border-gray-900 flex justify-between items-center text-[9px] text-gray-700 font-mono">
+                <span>© 2026 GAC_STUD_GLOBAL</span>
+                <div class="flex gap-4">
+                    <span class="animate-pulse text-gray-500">● SYSTEM ONLINE</span>
+                    <span>V.2.0.4-LTS</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+    </script>
+</body>
+
+</html>

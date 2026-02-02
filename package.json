@@ -1,0 +1,45 @@
+{
+  "name": "gunsandchoiceswebsite",
+  "version": "0.1.0",
+  "description": "A Webiste for the GAC Studio and the GAC Game",
+  "keywords": [
+    "website",
+    "nodejs",
+    "node",
+    "express",
+    "gac",
+    "gacstudio",
+    "gunsandchoices"
+  ],
+  "homepage": "https://github.com/GunsAndChoices/gac#readme",
+  "bugs": {
+    "url": "https://github.com/GunsAndChoices/gac/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GunsAndChoices/gac.git"
+  },
+  "license": "MIT",
+  "author": "TheCreateor / mrcool7387 & LordSimon",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i src/input.css -o dist/output.css",
+    "watch": "npx @tailwindcss/cli -i src/input.css -o dist/output.css --watch",
+    "start": "node server.js",
+    "test": "echo [ERROR]: No Test Command Definded && exit 1"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "^10.4.24",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.6.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "flowbite": "^4.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guns And Choices | Loading...</title>
+
+    <link href="/dist/output.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Audiowide&family=Italiana&family=Orbitron:wght@400;700&family=Rajdhani:wght@600&family=Forum&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Versteckt die Scrollbar für Chrome, Safari und Opera */
+        #console::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Versteckt die Scrollbar für IE, Edge und Firefox */
+        #console {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="font-mono min-h-screen flex flex-col items-center justify-center p-6">
+    <div class="w-full max-w-lg border border-gac-white p-8 bg-gac-black relative">
+        <div class="absolute -top-3 left-4 bg-gac-black px-2 text-xs font-bold tracking-[0.2em]">BOOT_SEQUENCE</div>
+
+        <div class="flex flex-col items-center mb-20">
+            <h1 class="text-xl font-bold tracking-widest uppercase animate-pulse">Establishing Connection</h1>
+        </div>
+
+        <div id="console"
+            class="bg-gray-900 bg-opacity-40 p-4 border border-gray-800 h-48 overflow-y-auto text-xs space-y-1">
+            <span class="block text-gray-500">>>> SYSTEM INITIALIZATION STARTED...</span>
+        </div>
+    </div>
+
+    <div class="toasts fixed bottom-5 right-5 z-50 flex flex-col gap-2">
+    </div>
+
+    <script>
+        const consoleEl = document.getElementById('console');
+
+        const sequence = [
+            { type: 'cleanup', msgs: ['PURGING EXPIRED COOKIES...', 'REFRESHING AUTH_BEARER...', 'SECURING LOCAL_STORAGE...', 'READY FOR HANDOFF.'] },
+            { type: 'ask', msgs: ['QUERYING REMOTE HOST...', 'PINGING UPLINK...', 'REQUESTING HANDSHAKE...'] },
+            { type: 'ping', msgs: ['RECEIVED PING (12ms)', 'PONG RECEIVED FROM SERVER', 'SIGNAL STRENGTH: OPTIMAL'] },
+            { type: 'hardware', msgs: ['IDENTIFYING DEVICE_FINGERPRINT...', 'CHECKING KERNEL_INTEGRITY...', 'VERIFYING TRUSTED_PLATFORM_MODULE...', 'HARDWARE_ACCELERATION: ENABLED'] },
+            { type: 'send', msgs: ['SENDING ENCRYPTED PAYLOAD...', 'TRANSMITTING CREDENTIALS...', 'UPLOADING AUTH_TOKEN...'] },
+            { type: 'crypto', msgs: ['ESTABLISHING END-TO-END ENCRYPTION...', 'EXCHANGING DH_KEYS...', 'INITIALIZING AES_256_GCM...', 'VERIFYING SSL_CERTIFICATE...'] },
+            { type: 'auth', msgs: ['VERIFYING CREDENTIALS...', 'CHECKING MULTI-FACTOR TOKEN...', 'VALIDATING SESSION_ID...', 'COMPARING BIOMETRIC_HASH...'] },
+            { type: 'geo', msgs: ['LOCATING NEAREST EDGE_SERVER...', 'VALIDATING IP_GEOLOCATION...', 'CHECKING PROXY_INTEGRITY...', 'LATENCY_CHECK: 14ms'] },
+            { type: 'session', msgs: ['GENERATING TEMPORARY_SESSION_KEY...', 'BINDING_SOCKET_TO_ID...', 'ATTACHING_WEBSOCKET_STREAM...', 'SESSION_TOKEN_ISSUED'] },
+            { type: 'account', msgs: ['FETCHING USER_PROFILE...', 'LOADING PERMISSIONS...', 'SYNCING PREFERENCES...', 'RESTORING CLOUD_SAVE...'] },
+            { type: 'ui', msgs: ['INJECTING STYLESHEETS...', 'HYDRATING_DOM_ELEMENTS...', 'COMPILING_VIEWPORT_RESOURCES...', 'UI_READY_FOR_INTERACTION'] },
+            { type: 'receive', msgs: ['RECEIVING SUCCESS_CODE...', 'ACCESS GRANTED BY GATEWAY', 'VALIDATION COMPLETE.'] },
+            { type: 'redirect', msgs: ['REDIRECTING TO DASHBOARD...', 'LOADING USER_INTERFACE...', 'FINALIZING UPLINK...'] }
+        ];
+
+        function addLine(text, color = 'text-gac-white') {
+            const span = document.createElement('span');
+            span.className = `block ${color}`;
+            span.innerText = `> ${text}`;
+            consoleEl.appendChild(span);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        async function runSequence() {
+            for (const step of sequence) {
+                await new Promise(r => setTimeout(r, 600 + Math.random() * 600));
+                const randomMsg = step.msgs[Math.floor(Math.random() * step.msgs.length)];
+                addLine(randomMsg);
+
+                if (step.type == "account") {
+                    await new Promise(r => setTimeout(r, 300))
+                    addLine("***************@*****.***")
+                }
+            }
+
+            setTimeout(() => {
+                window.location.href = '/dashboard';
+            }, 800);
+        }
+
+        runSequence();
+    </script>
+</body>
+
+</html>

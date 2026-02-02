@@ -1,0 +1,12 @@
+/* @import "tailwindcss"; */
+@config "../tailwind.config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hier kannst du bei Bedarf noch globale Styles ergänzen, die nicht als Plugin Sinn machen */
+body {
+    @apply bg-gac-black text-gac-white selection:bg-gac-white selection:text-gac-black;
+}
+
